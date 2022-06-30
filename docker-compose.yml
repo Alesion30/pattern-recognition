@@ -4,3 +4,5 @@ services:
     restart: always
     build: .
     tty: true
+    volumes:
+      - .:/usr/src/app
