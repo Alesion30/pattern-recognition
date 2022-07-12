@@ -6,3 +6,5 @@ services:
     tty: true
     volumes:
       - .:/usr/src/app
+    ports:
+      - 20022:20022
