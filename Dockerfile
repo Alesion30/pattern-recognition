@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow
+FROM python:3.9
 
 WORKDIR /usr/src/app
 
