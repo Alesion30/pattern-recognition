@@ -1,2 +1,3 @@
 src/data/food-101/images/*
 .DS_Store
+__pycache__
