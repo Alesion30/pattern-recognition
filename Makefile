@@ -24,11 +24,14 @@ restart: ## restart docker
 freeze: ## show list of installed pip packages
 	docker-compose exec python pip freeze
 
-reinstall: ## uninstall all package and reinstall pip package
+install: ## install pip package
+	docker-compose exec python pip install -r requirements.txt
+	docker-compose exec python pip freeze > requirements.txt
+
+uninstall: ## uninstall all package
 	docker-compose exec python pip freeze > uninstall.txt
 	docker-compose exec python pip uninstall -y -r uninstall.txt
 	docker-compose exec python rm -rf uninstall.txt
-	./pip.sh install -r requirements.txt
 
 sshkey: ## create ssh key
 	ssh-keygen -t rsa -f $(MAKEFILE_DIR)key/id_rsa
