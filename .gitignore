@@ -1,3 +1,4 @@
-src/data/food-101/images/*
+src/data/*
+!src/data/.gitkeep
 .DS_Store
 __pycache__
