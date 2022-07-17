@@ -1,4 +1,3 @@
-from typing import Sequence
 from torchvision.models import ResNet
 from torch import max, sum
 from tqdm import tqdm

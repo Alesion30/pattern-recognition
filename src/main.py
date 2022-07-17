@@ -1,10 +1,12 @@
 from torchvision.datasets import Food101
 from torchvision.transforms import Compose, Resize, RandomHorizontalFlip, ToTensor, Normalize
 from torch.utils.data import random_split, DataLoader
-from constants.path import DATA_DIR
+from constants.path import APP_DIR, DATA_DIR
 from torchvision.models import resnet18
 from torch.nn import CrossEntropyLoss, Linear
 from torch.optim import Adam
+import matplotlib.pyplot as plt
+import torch
 
 from model.resnet import trainResNetModel
 
@@ -78,7 +80,7 @@ model.fc = Linear(512, 101)
 
 # 学習の設定
 lr = 1e-4
-epoch = 2
+epoch = 10
 optim = Adam(model.parameters(), lr=lr, weight_decay=1e-4)
 criterion = CrossEntropyLoss()
 
@@ -91,6 +93,31 @@ fittedModel, loss, acc = trainResNetModel(
     optimizer=optim,
     num_epochs=epoch
 )
+
 print(fittedModel)
 print(acc)
 print(loss)
+
+torch.save(fittedModel.state_dict(), APP_DIR + 'build')
+
+# 可視化
+# loss_train = loss["train"]
+# loss_val = loss["val"]
+
+# acc_train = acc["train"]
+# acc_val = acc["val"]
+
+# fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 5))
+
+# axes[0].plot(range(epoch), loss_train, label="train")
+# axes[0].plot(range(epoch), loss_val,    label="val")
+# axes[0].set_title("Loss")
+# axes[0].legend()
+
+# axes[1].plot(range(epoch), acc_train, label="train")
+# axes[1].plot(range(epoch), acc_val,    label="val")
+# axes[1].set_title("Acc")
+# axes[1].legend()
+
+# fig.tight_layout()
+# fig.savefig(APP_DIR + "/img.png")
